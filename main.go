@@ -17,12 +17,7 @@ type AvailableUsernames struct {
 	Usernames []string `json:"usernames"`
 }
 
-func handler() (AvailableUsernames, error) {
-	desiredUsernames, err := getDesiredUsernames()
-	if err != nil {
-		return AvailableUsernames{}, fmt.Errorf("could not get desired usernames: %v", err)
-	}
-
+func handler(desiredUsernames DesiredUsernames) (AvailableUsernames, error) {
 	var availableUsernames []string
 	for _, username := range desiredUsernames.Usernames {
 		resp, err := http.Get(twitterURL + username)
@@ -35,10 +30,6 @@ func handler() (AvailableUsernames, error) {
 	}
 
 	return AvailableUsernames{Usernames: availableUsernames}, nil
-}
-
-func getDesiredUsernames() (DesiredUsernames, error) {
-	return DesiredUsernames{Usernames: []string{"krudler", "crudler", "derek", "hypertrace"}}, nil
 }
 
 func main() {

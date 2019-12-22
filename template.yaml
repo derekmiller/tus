@@ -12,11 +12,17 @@ Globals:
 
 Resources:
   TusFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
       Handler: tus
       Runtime: go1.x
+      Events:
+        Schedule:
+          Type: Schedule
+          Properties:
+            Input: {"usernames": ["krudler", "krudlers"]}
+            Schedule: rate(1 hour)
 
 # Outputs:
 #   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
