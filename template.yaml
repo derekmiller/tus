@@ -24,4 +24,4 @@ Resources:
           Type: Schedule
           Properties:
             Input: '{"usernames": ["krudler", "crudler", "hypertrace", "derek", "derekmiller"]}'
-            Schedule: rate(1 hour)
+            Schedule: rate(15 minutes)
