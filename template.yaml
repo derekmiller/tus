@@ -16,6 +16,9 @@ Resources:
       CodeUri: ./
       Handler: tus
       Runtime: go1.x
+      Policies: 
+        - SNSPublishMessagePolicy:
+            TopicName: tus-available
       Events:
         Schedule:
           Type: Schedule
