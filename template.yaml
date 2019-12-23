@@ -25,3 +25,12 @@ Resources:
           Properties:
             Input: '{"usernames": ["krudler", "crudler", "hypertrace", "derek", "derekmiller"]}'
             Schedule: rate(15 minutes)
+  EventInvokeConfig:
+    Type: AWS::Lambda::EventInvokeConfig
+    Properties:
+      FunctionName: !Ref TusFunction
+      Qualifier: "$LATEST"
+      MaximumRetryAttempts: 0
+      DestinationConfig:
+        OnSuccess:
+          Destination: arn:aws:sns:us-west-2:262965443437:tus-available
